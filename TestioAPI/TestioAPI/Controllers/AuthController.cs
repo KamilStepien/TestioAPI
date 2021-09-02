@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TestRestApi.Modles;
+using TestioAPI.Modles;
 
-namespace TestRestApi.Controllers
+namespace TestioAPI.Controllers
 {
     [Route("api/auth")]
     [ApiController]

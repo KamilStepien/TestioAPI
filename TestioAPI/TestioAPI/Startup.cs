@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace TestRestApi
+namespace TestioAPI
 {
     public class Startup
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestRestApi.Modles
+namespace TestioAPI.Modles
 {
     public class LoginModel
     {

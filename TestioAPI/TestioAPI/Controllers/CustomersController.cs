@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 
-namespace TestRestApi.Controllers
+namespace TestioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
