@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TestioAPI.Context;
 
 namespace TestioAPI
 {
@@ -21,17 +23,6 @@ namespace TestioAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("EnableCORS", builder =>
-                {
-                    builder.AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-                });
-            });
-
 
             services.AddAuthentication(opt =>
             {
@@ -54,6 +45,9 @@ namespace TestioAPI
                 });
 
             services.AddControllers();
+
+            services.AddDbContext<TestioDBContext>(
+               options => options.UseSqlServer(Configuration.GetSection("ConnectionStrings").GetSection("TestioDatabase").Value));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,8 +59,6 @@ namespace TestioAPI
             }
 
             app.UseHttpsRedirection();
-
-            app.UseCors("EnableCORS");
 
             app.UseRouting();
             app.UseAuthentication();
