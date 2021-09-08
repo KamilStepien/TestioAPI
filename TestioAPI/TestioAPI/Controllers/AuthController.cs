@@ -27,8 +27,8 @@ namespace TestioAPI.Controllers
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:44377",
-                    audience: "https://localhost:44377",
+                    issuer: "https://localhost:5000",
+                    audience: "https://localhost:5001",
                     claims: new List<Claim>(),
                     expires: DateTime.Now.AddMinutes(5),
                     signingCredentials: signingCredentials
