@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TestioAPI.Context;
+using TestioAPI.Services;
 
 namespace TestioAPI
 {
@@ -48,6 +49,10 @@ namespace TestioAPI
 
             services.AddDbContext<TestioDBContext>(
                options => options.UseSqlServer(Configuration.GetSection("ConnectionStrings").GetSection("TestioDatabase").Value));
+
+            //Services 
+
+            services.AddScoped<IAccountService, AccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
