@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using TestioAPI.Extensions.Logger;
 
 namespace TestioAPI.Extensions.Results
 {
@@ -21,12 +18,22 @@ namespace TestioAPI.Extensions.Results
 
         public new static DataResult<T> Error(string message)
         {
-            return new DataResult<T>(default(T), ResultStatus.Succes, message);
+            return new DataResult<T>(default(T), ResultStatus.Error, message);
         }
 
         public T Data => _data;
         public override bool IsSucces => base.IsSucces && Data != null;
         public override bool IsNotSucces => !IsSucces;
+
+        public override DataResult<T> Log()
+        {
+            if (IsError)
+            {
+                TLogger.Log().Msc(_message).Error();
+            }
+
+            return this;
+        }
 
     }
 }

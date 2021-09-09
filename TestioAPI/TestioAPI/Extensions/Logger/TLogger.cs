@@ -1,0 +1,51 @@
+﻿using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace TestioAPI.Extensions.Logger
+{
+    public class TLogger
+    {
+        private static ILogger _loggerInstance;
+        private string _message;
+        
+        public static void Config()
+        {
+            _loggerInstance = new LoggerConfiguration()
+               .WriteTo.Console()
+               .WriteTo.File("logs/log.text",
+               restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+               rollingInterval: RollingInterval.Day)
+               .WriteTo.File("logs/error.text",
+               restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+               .CreateLogger();
+        }
+
+        public static TLogger Log()
+        {
+            return new TLogger();
+        }
+
+        public TLogger Msc(string message)
+        {
+            _message = message;
+            return this;
+        }
+
+        public TLogger Error()
+        {
+            _loggerInstance.Error(_message);
+            return this;
+        }
+
+        public TLogger Information()
+        {
+            _loggerInstance.Information(_message);
+            return this;
+        }
+
+
+    }
+}

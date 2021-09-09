@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TestioAPI.Context;
+using TestioAPI.Extensions.Logger;
 using TestioAPI.Modles.Auth;
 using TestioAPI.Services;
 
@@ -10,7 +12,7 @@ namespace TestioAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        public AuthController(TestioDBContext context, IAccountService accountService)
+        public AuthController(IAccountService accountService)
         {
             _accountService = accountService;
         }
@@ -18,8 +20,10 @@ namespace TestioAPI.Controllers
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody] UserLoginModel model)
         {
-            if(!ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
+                TLogger.Log().Msc("Model is not valid").Error();
                 return BadRequest("Model is not valid");
             }
 
@@ -38,6 +42,7 @@ namespace TestioAPI.Controllers
         {
             if(!ModelState.IsValid)
             {
+                TLogger.Log().Msc("Model is not valid").Error();
                 return BadRequest("Model is not valid ");
             }
 

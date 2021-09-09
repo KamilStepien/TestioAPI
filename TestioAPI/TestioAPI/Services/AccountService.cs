@@ -44,7 +44,7 @@ namespace TestioAPI.Services
 
                 if (userdb == null)
                 {
-                    return DataResult<string>.Error("User don't existing in database ");
+                    return DataResult<string>.Error($"User don't existing in database login({model.Login})").Log();
                 }
 
                 if (BC.Verify(model.Password, userdb.Password))
@@ -53,8 +53,8 @@ namespace TestioAPI.Services
                     var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                     var tokenOptions = new JwtSecurityToken(
-                        issuer: "https://localhost:44377",
-                        audience: "https://localhost:44377",
+                        issuer: "https://localhost:5001",
+                        audience: "https://localhost:5001",
                         claims: new List<Claim>(),
                         expires: DateTime.Now.AddMinutes(5),
                         signingCredentials: signingCredentials
@@ -69,7 +69,7 @@ namespace TestioAPI.Services
             }
             catch(Exception e)
             {
-                return DataResult<string>.Error(e.Message);
+                return DataResult<string>.Error(e.Message).Log();
             }
           
         }
@@ -78,7 +78,7 @@ namespace TestioAPI.Services
         {
             if (model == null)
             {
-                return DataResult<string>.Error("Model is null");
+                return DataResult<string>.Error("Model is null").Log();
             }
 
             try
@@ -86,7 +86,7 @@ namespace TestioAPI.Services
                 var userdb = _context.Users.FirstOrDefault(x => x.Login == model.Login);
                 if (userdb != null)
                 {
-                    return Result.Error("Login is existing in database");
+                    return Result.Error($"Login is existing in database login({model.Login})").Log();
                 }
 
                 var user = new User

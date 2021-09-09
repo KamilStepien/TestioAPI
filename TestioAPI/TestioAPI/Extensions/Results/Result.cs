@@ -1,10 +1,10 @@
-﻿
+﻿using TestioAPI.Extensions.Logger;
 
 namespace TestioAPI.Extensions.Results
 {
     public class Result
     {
-        private string _message;
+        internal string _message;
         private ResultStatus _status;
 
         internal Result(ResultStatus status , string message = "")
@@ -32,6 +32,16 @@ namespace TestioAPI.Extensions.Results
         public override string ToString()
         {
             return _message;
+        }
+
+        public virtual Result Log()
+        {
+            if (IsError)
+            {
+                TLogger.Log().Msc(_message).Error();
+            }
+
+            return this;
         }
 
     }
