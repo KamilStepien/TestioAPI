@@ -55,7 +55,10 @@ namespace TestioAPI.Services
                     var tokenOptions = new JwtSecurityToken(
                         issuer: "https://localhost:5001",
                         audience: "https://localhost:5001",
-                        claims: new List<Claim>(),
+                        claims: new List<Claim>()
+                        {
+                             new Claim(ClaimTypes.Name, userdb.Id.ToString()),
+                        },
                         expires: DateTime.Now.AddMinutes(5),
                         signingCredentials: signingCredentials
                         );
