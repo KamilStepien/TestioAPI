@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TestioAPI.Modles.Auth
+namespace TestioAPI.Models.Auth
 {
     public class UserLoginModel
     {

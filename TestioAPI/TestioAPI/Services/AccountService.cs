@@ -8,7 +8,7 @@ using System.Text;
 using TestioAPI.Context;
 using TestioAPI.Entities;
 using TestioAPI.Extensions.Results;
-using TestioAPI.Modles.Auth;
+using TestioAPI.Models.Auth;
 using BC = BCrypt.Net.BCrypt;
 
 
