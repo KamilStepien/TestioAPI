@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestioAPI.Entities
@@ -16,5 +17,8 @@ namespace TestioAPI.Entities
         public string Password { get; set; }
         [Column("u_email", TypeName = "varchar(60)")]
         public string Email { get; set; }
+
+        public ICollection<Task> Tasks { get; set; }
+
     }
 }
