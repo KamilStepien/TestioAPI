@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using TestioAPI.Context;
 using TestioAPI.Extensions.Logger;
-using TestioAPI.Modles.Auth;
+using TestioAPI.Models.Auth;
 using TestioAPI.Services;
 
 namespace TestioAPI.Controllers
