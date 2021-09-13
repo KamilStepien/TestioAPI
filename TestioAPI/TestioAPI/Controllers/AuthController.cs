@@ -21,10 +21,9 @@ namespace TestioAPI.Controllers
         public IActionResult Login([FromBody] UserLoginModel model)
         {
 
-            if (!ModelState.IsValid)
+            if (CheckIsValidModel())
             {
-                TLogger.Log().Msc("Model is not valid").Error();
-                return BadRequest("Model is not valid");
+                return ModelNotValidRespons();
             }
 
             var result = _accountService.Login(model);
@@ -40,10 +39,9 @@ namespace TestioAPI.Controllers
         [HttpPost, Route("register")]
         public IActionResult Registger([FromBody] UserRegisterModel model)
         {
-            if(!ModelState.IsValid)
+            if (CheckIsValidModel())
             {
-                TLogger.Log().Msc("Model is not valid").Error();
-                return BadRequest("Model is not valid ");
+                return ModelNotValidRespons();
             }
 
             var result = _accountService.Register(model);

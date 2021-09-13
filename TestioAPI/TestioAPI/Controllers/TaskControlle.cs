@@ -26,10 +26,9 @@ namespace TestioAPI.Controllers
         public IActionResult Add([FromBody] TaskAddModel model)
         {
 
-            if (!ModelState.IsValid)
+            if(CheckIsValidModel())
             {
-                TLogger.Log().Msc("Model is not valid").Error();
-                return BadRequest("Model is not valid");
+                return ModelNotValidRespons();
             }
 
             var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value);
@@ -62,10 +61,9 @@ namespace TestioAPI.Controllers
         [Authorize]
         public IActionResult Edit(TaskEditModel model)
         {
-            if (!ModelState.IsValid)
+            if (CheckIsValidModel())
             {
-                TLogger.Log().Msc("Model is not valid").Error();
-                return BadRequest("Model is not valid");
+                return ModelNotValidRespons();
             }
 
             var result = _task.EditTask(UserId, model);
@@ -96,10 +94,9 @@ namespace TestioAPI.Controllers
         [Authorize]
         public IActionResult EditStatus([FromBody] TaskEditStatusModel model)
         {
-            if (!ModelState.IsValid)
+            if (CheckIsValidModel())
             {
-                TLogger.Log().Msc("Model is not valid").Error();
-                return BadRequest("Model is not valid");
+                return ModelNotValidRespons();
             }
 
             var result = _task.EditStatus(UserId, model);
