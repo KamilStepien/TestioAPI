@@ -21,17 +21,17 @@ namespace TestioAPI.Controllers
             _task = task;
         }
 
-        [HttpPost]
+        [HttpPost, Route("add")]
         [Authorize]
         public IActionResult Add([FromBody] TaskAddModel model)
         {
 
-            if(CheckIsValidModel())
+            if (CheckIsNotValidModel())
             {
                 return ModelNotValidRespons();
             }
 
-            var result = _task.AddTask(UserId, model);
+            var result = _task.AddTask(Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value), model);
 
             if (result.IsNotSucces)
             {
@@ -41,7 +41,7 @@ namespace TestioAPI.Controllers
             return Ok(result.Data);
         }
 
-        [HttpGet]
+        [HttpGet, Route("get")]
         [Authorize]
         public IActionResult GetTasks([FromQuery(Name = "taskStatus")] int? taskStatus)
         {
@@ -56,17 +56,17 @@ namespace TestioAPI.Controllers
             return Ok(result.Data);
         }
 
-        [HttpPut]
+        [HttpPut, Route("put")]
         [Authorize]
         public IActionResult Edit(TaskEditModel model)
         {
-            if (CheckIsValidModel())
+            if (CheckIsNotValidModel())
             {
                 return ModelNotValidRespons();
             }
 
             var result = _task.EditTask(UserId, model);
-            if(result.IsNotSucces)
+            if (result.IsNotSucces)
             {
                 return BadRequest(result);
             }
@@ -74,13 +74,13 @@ namespace TestioAPI.Controllers
             return Ok(result.Data);
         }
 
-        [HttpDelete,Route("{taskId}")]
+        [HttpDelete, Route("{taskId}")]
         [Authorize]
         public IActionResult Delete(int taskId)
         {
             var result = _task.DeleteTask(UserId, taskId);
 
-            if(result.IsNotSucces)
+            if (result.IsNotSucces)
             {
                 return BadRequest(result.ToString());
             }
@@ -93,7 +93,7 @@ namespace TestioAPI.Controllers
         [Authorize]
         public IActionResult EditStatus([FromBody] TaskEditStatusModel model)
         {
-            if (CheckIsValidModel())
+            if (CheckIsNotValidModel())
             {
                 return ModelNotValidRespons();
             }
@@ -108,7 +108,7 @@ namespace TestioAPI.Controllers
             return Ok(result.Data);
         }
 
-       
+
 
     }
 }

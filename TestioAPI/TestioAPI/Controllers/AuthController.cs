@@ -21,7 +21,7 @@ namespace TestioAPI.Controllers
         public IActionResult Login([FromBody] UserLoginModel model)
         {
 
-            if (CheckIsValidModel())
+            if (CheckIsNotValidModel())
             {
                 return ModelNotValidRespons();
             }
@@ -39,7 +39,7 @@ namespace TestioAPI.Controllers
         [HttpPost, Route("register")]
         public IActionResult Registger([FromBody] UserRegisterModel model)
         {
-            if (CheckIsValidModel())
+            if (CheckIsNotValidModel())
             {
                 return ModelNotValidRespons();
             }

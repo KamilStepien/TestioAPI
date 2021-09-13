@@ -8,21 +8,21 @@ using TestioAPI.Extensions.Logger;
 
 namespace TestioAPI.Controllers
 {
-    public class ControllerTestioBase:ControllerBase
+    public class  ControllerTestioBase:ControllerBase
     {
         private string _modelIsNotValidMessage = "Model is not valid";
         public int UserId => Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value);
 
-        public bool CheckIsValidModel()
-        {
 
+        public bool CheckIsNotValidModel()
+        {
             if (!ModelState.IsValid)
             {
                 TLogger.Log().Msc(_modelIsNotValidMessage).Error();
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public IActionResult ModelNotValidRespons() => BadRequest(_modelIsNotValidMessage);
