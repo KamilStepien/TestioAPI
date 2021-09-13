@@ -62,6 +62,7 @@ namespace TestioAPI
             //Services 
 
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ITaskService, TaskService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
