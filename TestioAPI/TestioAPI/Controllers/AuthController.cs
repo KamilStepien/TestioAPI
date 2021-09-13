@@ -2,14 +2,14 @@
 using Microsoft.Extensions.Logging;
 using TestioAPI.Context;
 using TestioAPI.Extensions.Logger;
-using TestioAPI.Modles.Auth;
+using TestioAPI.Models.Auth;
 using TestioAPI.Services;
 
 namespace TestioAPI.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : ControllerTestioBase
     {
         private readonly IAccountService _accountService;
         public AuthController(IAccountService accountService)
@@ -21,10 +21,9 @@ namespace TestioAPI.Controllers
         public IActionResult Login([FromBody] UserLoginModel model)
         {
 
-            if (!ModelState.IsValid)
+            if (CheckIsValidModel())
             {
-                TLogger.Log().Msc("Model is not valid").Error();
-                return BadRequest("Model is not valid");
+                return ModelNotValidRespons();
             }
 
             var result = _accountService.Login(model);
@@ -40,10 +39,9 @@ namespace TestioAPI.Controllers
         [HttpPost, Route("register")]
         public IActionResult Registger([FromBody] UserRegisterModel model)
         {
-            if(!ModelState.IsValid)
+            if (CheckIsValidModel())
             {
-                TLogger.Log().Msc("Model is not valid").Error();
-                return BadRequest("Model is not valid ");
+                return ModelNotValidRespons();
             }
 
             var result = _accountService.Register(model);
