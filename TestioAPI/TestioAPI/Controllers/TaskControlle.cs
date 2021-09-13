@@ -31,7 +31,7 @@ namespace TestioAPI.Controllers
                 return ModelNotValidRespons();
             }
 
-            var result = _task.AddTask(Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value), model);
+            var result = _task.AddTask(UserId, model);
 
             if (result.IsNotSucces)
             {
