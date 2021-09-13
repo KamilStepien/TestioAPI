@@ -9,7 +9,7 @@ namespace TestioAPI.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : ControllerTestioBase
     {
         private readonly IAccountService _accountService;
         public AuthController(IAccountService accountService)

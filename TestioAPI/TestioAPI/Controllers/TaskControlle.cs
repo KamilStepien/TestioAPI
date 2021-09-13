@@ -13,7 +13,7 @@ namespace TestioAPI.Controllers
 {
     [Route("api/task")]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class TaskController : ControllerTestioBase
     {
         private readonly ITaskService _task;
         public TaskController(ITaskService task)
@@ -47,9 +47,8 @@ namespace TestioAPI.Controllers
         [Authorize]
         public IActionResult GetTasks([FromQuery(Name = "taskStatus")] int? taskStatus)
         {
-            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value);
 
-            var result = _task.GetTasks(userId, taskStatus);
+            var result = _task.GetTasks(UserId, taskStatus);
 
             if (result.IsNotSucces)
             {
@@ -69,9 +68,7 @@ namespace TestioAPI.Controllers
                 return BadRequest("Model is not valid");
             }
 
-            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value);
-
-            var result = _task.EditTask(userId, model);
+            var result = _task.EditTask(UserId, model);
             if(result.IsNotSucces)
             {
                 return BadRequest(result);
@@ -84,8 +81,7 @@ namespace TestioAPI.Controllers
         [Authorize]
         public IActionResult Delete(int taskId)
         {
-            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value);
-            var result = _task.DeleteTask(userId, taskId);
+            var result = _task.DeleteTask(UserId, taskId);
 
             if(result.IsNotSucces)
             {
@@ -106,8 +102,7 @@ namespace TestioAPI.Controllers
                 return BadRequest("Model is not valid");
             }
 
-            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value);
-            var result = _task.EditStatus(userId, model);
+            var result = _task.EditStatus(UserId, model);
 
             if (result.IsNotSucces)
             {
