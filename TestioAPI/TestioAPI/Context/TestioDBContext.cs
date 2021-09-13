@@ -14,7 +14,7 @@ namespace TestioAPI.Context
       
 
         public DbSet<Entities.User> Users { get; set; }
-
+        public DbSet<Entities.Task> Tasks { get; set; }
 
     }
 }
