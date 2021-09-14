@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestioAPI.Context;
@@ -21,9 +22,11 @@ namespace TestioAPI.Services
     public class TaskService : ITaskService
     {
         public readonly TestioDBContext _context;
-        public TaskService(TestioDBContext context)
+        public readonly IMapper _mapper;
+        public TaskService(TestioDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public DataResult<TaskModel> AddTask(int userId, TaskAddModel model)
@@ -42,14 +45,7 @@ namespace TestioAPI.Services
                 _context.Tasks.Add(taskdb);
                 _context.SaveChanges();
 
-                return DataResult<TaskModel>.Succes(new TaskModel
-                {
-                    Id = taskdb.Id,
-                    UserId = taskdb.UserId,
-                    Name = taskdb.Name,
-                    Description = taskdb.Description,
-                    Status = taskdb.Status
-                });
+                return DataResult<TaskModel>.Succes(_mapper.Map<TaskModel>(taskdb));
             }
             catch(Exception ex)
             {
@@ -96,14 +92,7 @@ namespace TestioAPI.Services
                 taskdb.Status = model.NewStatus;
                 _context.SaveChanges();
 
-                return DataResult<TaskModel>.Succes(new TaskModel
-                {
-                    Id = taskdb.Id,
-                    UserId = taskdb.UserId,
-                    Name = taskdb.Name,
-                    Description = taskdb.Description,
-                    Status = taskdb.Status
-                });
+                return DataResult<TaskModel>.Succes(_mapper.Map<TaskModel>(taskdb));
 
             }
             catch(Exception ex)
@@ -128,14 +117,7 @@ namespace TestioAPI.Services
 
                 _context.SaveChanges();
 
-                return DataResult<TaskModel>.Succes(new TaskModel
-                {
-                    Id = taskdb.Id,
-                    UserId = taskdb.UserId,
-                    Name = taskdb.Name,
-                    Description = taskdb.Description,
-                    Status = taskdb.Status
-                });
+                return DataResult<TaskModel>.Succes(_mapper.Map<TaskModel>(taskdb));
 
             }
             catch(Exception ex)
@@ -156,16 +138,7 @@ namespace TestioAPI.Services
                     tasksdb = tasksdb.Where(t => (int)t.Status == taskStatus.Value);
                 }
 
-                var tasksList = tasksdb.Select(x => new TaskModel
-                {
-                    Id = x.Id,
-                    UserId = x.UserId,
-                    Name = x.Name,
-                    Description = x.Description,
-                    Status = x.Status
-                }).ToList();
-
-                return DataResult<List<TaskModel>>.Succes(tasksList);
+                return DataResult<List<TaskModel>>.Succes(_mapper.Map<List<TaskModel>>(tasksdb.ToList()));
 
             }
             catch(Exception ex)
