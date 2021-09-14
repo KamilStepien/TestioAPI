@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using TestioAPI.Entities;
@@ -12,6 +13,7 @@ namespace TestioAPITest.AutomapperTest
     {
 
         [Fact]
+        [Category("AutoMapper")]
         public void Map_Task_to_TaskModel()
         {
 

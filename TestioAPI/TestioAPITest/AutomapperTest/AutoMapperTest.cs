@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using TestioAPI.Entities;
 using TestioAPI.Models.Taks;
@@ -13,6 +14,7 @@ namespace TestioAPITest.AutomapperTest
         internal  IMapper _mapper;
         private MapperConfiguration _mapperConfiguration;
 
+
         public AutoMapperTest()
         {
             _mapperConfiguration = new MapperConfiguration(cfg => 
@@ -22,6 +24,7 @@ namespace TestioAPITest.AutomapperTest
         }
 
         [Fact]
+        [Category("AutoMapper")]
         public void Map_Should_HaveValidConfig()
         {
             _mapperConfiguration.AssertConfigurationIsValid();
