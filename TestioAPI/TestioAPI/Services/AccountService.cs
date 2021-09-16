@@ -92,7 +92,7 @@ namespace TestioAPI.Services
                     return Result.Warning($"Użytkownik o podanym loginie istniej już w bazie danych ({model.Login})").Log();
                 }
 
-                var user = new User
+                var user = new Users
                 {
                     Login = model.Login,
                     Password = BC.HashPassword(model.Password),

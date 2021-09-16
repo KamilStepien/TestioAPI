@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestioAPI.Entities
 {
-    [Table("User")]
-    public class User
+    [Table("Users")]
+    public class Users
     {
         [Key]
         public int Id { get; set; }
@@ -18,7 +18,7 @@ namespace TestioAPI.Entities
         [Column("u_email", TypeName = "varchar(30)")]
         public string Email { get; set; }
 
-        public ICollection<Task> Tasks { get; set; }
+        public ICollection<Tasks> Tasks { get; set; }
 
     }
 }

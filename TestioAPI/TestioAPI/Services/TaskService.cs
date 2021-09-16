@@ -34,7 +34,7 @@ namespace TestioAPI.Services
             TLogger.Log().Msc("Dodawanie zadania").Information();
             try
             {
-                var taskdb = new Task
+                var taskdb = new Tasks
                 {
                     UserId = userId,
                     Status = TaskStatusEnum.Create,

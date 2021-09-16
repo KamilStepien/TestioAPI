@@ -13,8 +13,8 @@ namespace TestioAPI.Context
         : base(options) { }
       
 
-        public DbSet<Entities.User> Users { get; set; }
-        public DbSet<Entities.Task> Tasks { get; set; }
+        public DbSet<Entities.Users> Users { get; set; }
+        public DbSet<Entities.Tasks> Tasks { get; set; }
 
     }
 }
