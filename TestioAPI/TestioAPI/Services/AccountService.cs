@@ -35,7 +35,7 @@ namespace TestioAPI.Services
         {
             if (model == null)
             {
-                return DataResult<string>.Error("Model is null");
+                return DataResult<string>.Error("Nieprzekazano danych do logowania");
             }
 
             try
@@ -44,7 +44,7 @@ namespace TestioAPI.Services
 
                 if (userdb == null)
                 {
-                    return DataResult<string>.Error($"User don't existing in database login({model.Login})").Log();
+                    return DataResult<string>.Warning($"Nie ma użytkownika o loginie: ({model.Login})").Log();
                 }
 
                 if (BC.Verify(model.Password, userdb.Password))
@@ -67,7 +67,7 @@ namespace TestioAPI.Services
                     return DataResult<string>.Succes(tokenString);
                 }
 
-                return DataResult<string>.Error("Password is incorrect");
+                return DataResult<string>.Warning("Hasło jest nieprawidłowe");
 
             }
             catch(Exception e)
@@ -81,7 +81,7 @@ namespace TestioAPI.Services
         {
             if (model == null)
             {
-                return DataResult<string>.Error("Model is null").Log();
+                return Result.Error("Nieprzekazano danych do rejestracji").Log();
             }
 
             try
@@ -89,7 +89,7 @@ namespace TestioAPI.Services
                 var userdb = _context.Users.FirstOrDefault(x => x.Login == model.Login);
                 if (userdb != null)
                 {
-                    return Result.Error($"Login is existing in database login({model.Login})").Log();
+                    return Result.Warning($"Użytkownik o podanym loginie istniej już w bazie danych ({model.Login})").Log();
                 }
 
                 var user = new User
