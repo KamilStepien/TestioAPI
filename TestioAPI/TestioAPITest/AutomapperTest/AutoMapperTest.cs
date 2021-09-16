@@ -18,7 +18,7 @@ namespace TestioAPITest.AutomapperTest
         public AutoMapperTest()
         {
             _mapperConfiguration = new MapperConfiguration(cfg => 
-            cfg.CreateMap<Task, TaskModel>());
+            cfg.CreateMap<Tasks, TaskModel>());
 
             _mapper = _mapperConfiguration.CreateMapper();
         }

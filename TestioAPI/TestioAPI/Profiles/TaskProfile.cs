@@ -8,7 +8,7 @@ namespace TestioAPI.Profiles
     {
         public TaskProfile()
         {
-            CreateMap<Task, TaskModel>();
+            CreateMap<Tasks, TaskModel>();
                 
         }
     }

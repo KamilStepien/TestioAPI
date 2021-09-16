@@ -10,7 +10,7 @@ namespace TestioAPI.Controllers
 {
     public class  ControllerTestioBase:ControllerBase
     {
-        private string _modelIsNotValidMessage = "Model is not valid";
+        private string _modelIsNotValidMessage = "Przekazany model jest nieprawidłowy";
         public int UserId => Convert.ToInt32(User.FindFirst(ClaimTypes.Name)?.Value);
 
 

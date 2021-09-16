@@ -34,16 +34,19 @@ namespace TestioAPI.Extensions.Logger
             return this;
         }
 
-        public TLogger Error()
+        public void Error()
         {
             _loggerInstance.Error(_message);
-            return this;
         }
 
-        public TLogger Information()
+        public void Information()
         {
             _loggerInstance.Information(_message);
-            return this;
+        }
+
+        public void Warning()
+        {
+            _loggerInstance.Warning(_message);
         }
 
 

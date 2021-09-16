@@ -21,17 +21,18 @@ namespace TestioAPI.Extensions.Results
             return new DataResult<T>(default(T), ResultStatus.Error, message);
         }
 
+        public new static DataResult<T> Warning(string message)
+        {
+            return new DataResult<T>(default(T), ResultStatus.Warning, message);
+        }
+
         public T Data => _data;
         public override bool IsSucces => base.IsSucces && Data != null;
         public override bool IsNotSucces => !IsSucces;
 
         public override DataResult<T> Log()
         {
-            if (IsError)
-            {
-                TLogger.Log().Msc(_message).Error();
-            }
-
+            LoggerLog();
             return this;
         }
 

@@ -4,8 +4,8 @@ using TestioAPI.Models.Taks;
 
 namespace TestioAPI.Entities
 {
-    [Table("Task")]
-    public class Task
+    [Table("Tasks")]
+    public class Tasks
     {
         [Key]
         public int Id { get; set; }
@@ -22,6 +22,6 @@ namespace TestioAPI.Entities
         [Range(1, 3)]
         public TaskStatusEnum Status { get; set; }
 
-        public User User { get; set; }
+        public Users User { get; set; }
     }
 }

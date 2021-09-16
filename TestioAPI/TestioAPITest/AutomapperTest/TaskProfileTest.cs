@@ -17,7 +17,7 @@ namespace TestioAPITest.AutomapperTest
         public void Map_Task_to_TaskModel()
         {
 
-            var current = new Task
+            var current = new Tasks
             {
                 Id = 1,
                 Description = "Description",
