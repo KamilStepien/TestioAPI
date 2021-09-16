@@ -8,6 +8,7 @@ namespace TestioAPI.Extensions.Results
     public enum ResultStatus
     {
         Succes,
+        Warning,
         Error
     }
 }
